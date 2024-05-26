@@ -2,11 +2,11 @@ export type UserProps = {
   name: string;
   email: string;
   password: string;
-  createAt?: Date;
+  createdAt?: Date;
 };
 
 export class UserEntity {
   constructor(public readonly props: UserProps) {
-    this.props.createAt = this.props.createAt ?? new Date();
+    this.props.createdAt = this.props.createdAt ?? new Date();
   }
 }
