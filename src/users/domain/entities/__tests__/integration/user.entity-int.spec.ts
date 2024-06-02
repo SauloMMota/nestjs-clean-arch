@@ -125,4 +125,27 @@ describe('User Entity integration tests', () => {
       entity.update('other name');
     });
   });
+
+  describe('UpdatePassword method', () => {
+    it('Should a invalid user using password field', () => {
+      const entity = new UserEntity(UserDataBuilder({}));
+      expect(() => entity.updatePassword(null)).toThrow(EnitityValidationError);
+      expect(() => entity.updatePassword('')).toThrow(EnitityValidationError);
+      expect(() => entity.updatePassword('a'.repeat(101))).toThrow(
+        EnitityValidationError,
+      );
+      expect(() => entity.updatePassword(9 as any)).toThrow(
+        EnitityValidationError,
+      );
+    });
+
+    it('Should a valid user', () => {
+      expect.assertions(0);
+      const props: UserProps = {
+        ...UserDataBuilder({}),
+      };
+      const entity = new UserEntity(props);
+      entity.updatePassword('other password');
+    });
+  });
 });
